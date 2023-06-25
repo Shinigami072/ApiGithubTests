@@ -3,9 +3,11 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
     paths:
+      - .github/workflows/api.yml
       - api/**
   pull_request:
     paths:
+      - .github/workflows/api.yml
       - api/**
 
 jobs:
