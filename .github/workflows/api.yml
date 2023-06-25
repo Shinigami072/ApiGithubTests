@@ -77,6 +77,10 @@ jobs:
     runs-on: ubuntu-latest
     name: OpenApi
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'
       - name: Bundle
         id: bundle
         uses: ./.github/actions/ApiCustomAction
