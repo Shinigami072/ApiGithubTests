@@ -47,15 +47,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Lint
-        uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
+        uses: seeebiii/redoc-cli-github-action@v10
         with:
           args: 'lint api/openapi.yaml'
       - name: Bundle
-        uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
+        uses: seeebiii/redoc-cli-github-action@v10
         with:
           args: 'bundle --dereferenced ./api/openapi.yaml --output ./api/bundle/openapi.yaml'
       - name: Build Docs
-        uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
+        uses: seeebiii/redoc-cli-github-action@v10
         with:
           args: 'build-docs ./api/openapi.yaml  --output ./openapi.html'
       - uses: actions/upload-artifact@v2
