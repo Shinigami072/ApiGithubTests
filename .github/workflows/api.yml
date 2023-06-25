@@ -61,6 +61,17 @@ jobs:
         uses: ./.github/actions/ApiCustomAction
         with:
           args: 'lint api/openapi.yaml --format=checkstyle'
+      - run: |
+          cat <<EOF
+          ${{steps.lint-report.outputs.std-err}}
+          EOF >  ./openapi-linting-report.xml
+        if: ${{ failure() }}
+        name: "Persist Linting Err Report"
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: report-lint
+          path: ./openapi-linting-report.xml
       - name: Bundle
         id: bundle
         uses: ./.github/actions/ApiCustomAction
@@ -77,17 +88,6 @@ jobs:
           path: ./api/bundle/openapi.yaml
           if-no-files-found: error
 
-      - run: |
-          cat <<EOF
-          ${{steps.lint.outputs.std-err}}
-          EOF >  ./openapi-linting-report.json
-        if: ${{ failure() }}
-        name: "Persist Linting Err Report"
-      - uses: actions/upload-artifact@v2
-        if:  ${{ failure() }}
-        with:
-          name: report-lint.json
-          path: ./openapi-linting-report.json
       - uses: actions/upload-artifact@v2
         with:
           name: openapi.html
