@@ -13,5 +13,6 @@ paths:
           content:
             text/html:
               schema:
-                description: 'Page of the example app'
+                description: >
+                 Page of the example app
                 type: string
