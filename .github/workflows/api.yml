@@ -70,7 +70,7 @@ jobs:
           name: openapi.yaml
           path: ./api/bundle/openapi.yaml
           if-no-files-found: error
-      - run: echo "${steps.lint.outputs.output}" > ./openapi-linting-report
+      - run: echo ${{steps.lint.outputs.output}} > ./openapi-linting-report
         if:  ${{ failure() }}
         name: "Persist Linting Report"
       - uses: actions/upload-artifact@v2
