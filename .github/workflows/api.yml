@@ -42,9 +42,9 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  OpenAPI:
+  OpenAPI-Lint:
     runs-on: ubuntu-latest
-    name: OpenApi
+    name: OpenApi Lint
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -72,6 +72,11 @@ jobs:
         with:
           name: report-lint
           path: ./openapi-linting-report.xml
+  OpenAPI:
+    needs: OpenAPI-Lint
+    runs-on: ubuntu-latest
+    name: OpenApi
+    steps:
       - name: Bundle
         id: bundle
         uses: ./.github/actions/ApiCustomAction
@@ -87,7 +92,6 @@ jobs:
           name: openapi.yaml
           path: ./api/bundle/openapi.yaml
           if-no-files-found: error
-
       - uses: actions/upload-artifact@v2
         with:
           name: openapi.html
