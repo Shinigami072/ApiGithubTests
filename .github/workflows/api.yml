@@ -51,14 +51,17 @@ jobs:
         with:
           submodules: 'true'
       - name: Lint
+        id: lint
         uses: ./.github/actions/ApiCustomAction
         with:
           args: 'lint api/openapi.yaml'
       - name: Bundle
+        id: bundle
         uses: ./.github/actions/ApiCustomAction
         with:
           args: 'bundle api/openapi.yaml --dereferenced --output ./api/bundle/openapi.yaml'
       - name: Build Docs
+        id: docs
         uses: ./.github/actions/ApiCustomAction
         with:
           args: 'build-docs api/openapi.yaml  --output ./api/html/openapi.html'
@@ -67,7 +70,14 @@ jobs:
           name: openapi.yaml
           path: ./api/bundle/openapi.yaml
           if-no-files-found: error
-
+      - run: echo "${steps.lint.outputs.output}" > ./openapi-linting-report
+        if: failed()
+        name: "Persist Linting Report"
+      - uses: actions/upload-artifact@v2
+        if: failed()
+        with:
+          name: report-lint
+          path: ./openapi-linting-report
       - uses: actions/upload-artifact@v2
         with:
           name: openapi.html
