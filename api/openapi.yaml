@@ -3,7 +3,7 @@ info:
   title: API Title
   version: "1.0"
   license:
-#    name: TEST
+    name: TEST
 servers:
   - url: https://api.server.test/v1
 paths:
