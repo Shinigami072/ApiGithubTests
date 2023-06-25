@@ -72,8 +72,27 @@ jobs:
         with:
           name: report-lint
           path: ./openapi-linting-report.xml
-  OpenAPI:
-    needs: OpenAPI-Lint
+  OpenAPI-Bundle:
+    needs: OpenAPI-Bundle
+    runs-on: ubuntu-latest
+    name: OpenApi
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - name: Bundle
+        id: bundle
+        uses: ./.github/actions/ApiCustomAction
+        with:
+          args: 'bundle api/openapi.yaml --dereferenced --output ./api/bundle/openapi.yaml'
+      - uses: actions/upload-artifact@v2
+        with:
+          name: openapi.yaml
+          path: ./api/bundle/openapi.yaml
+          if-no-files-found: error
+  OpenAPI-Docs:
+    needs: OpenAPI-Docs
     runs-on: ubuntu-latest
     name: OpenApi
     steps:
@@ -91,11 +110,6 @@ jobs:
         uses: ./.github/actions/ApiCustomAction
         with:
           args: 'build-docs api/openapi.yaml  --output ./api/html/openapi.html'
-      - uses: actions/upload-artifact@v2
-        with:
-          name: openapi.yaml
-          path: ./api/bundle/openapi.yaml
-          if-no-files-found: error
       - uses: actions/upload-artifact@v2
         with:
           name: openapi.html
