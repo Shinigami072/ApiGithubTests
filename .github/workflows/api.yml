@@ -55,6 +55,12 @@ jobs:
         uses: ./.github/actions/ApiCustomAction
         with:
           args: 'lint api/openapi.yaml'
+      - name: Lint Report
+        id: lint-report
+        if: ${{failure()}}
+        uses: ./.github/actions/ApiCustomAction
+        with:
+          args: 'lint api/openapi.yaml --format=checkstyle'
       - name: Bundle
         id: bundle
         uses: ./.github/actions/ApiCustomAction
