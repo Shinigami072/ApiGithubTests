@@ -2,12 +2,16 @@ openapi: "3.0.2"
 info:
   title: API Title
   version: "1.0"
+  license:
+    name: TEST
 servers:
   - url: https://api.server.test/v1
 paths:
   /:
     get:
+      security: []
       operationId: GetIndex
+      summary: Get Index
       responses:
         '200':
           description: OK
