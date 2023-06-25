@@ -49,15 +49,15 @@ jobs:
         with:
           submodules: 'true'
       - name: Lint
-        uses: ./.github/actions/ApiGithubTests
+        uses: ./.github/actions/ApiCustomAction
         with:
           args: 'lint api/openapi.yaml'
       - name: Bundle
-        uses: ./.github/actions/ApiGithubTests
+        uses: ./.github/actions/ApiCustomAction
         with:
           args: 'bundle api/openapi.yaml --dereferenced --output ./api/bundle/openapi.yaml'
       - name: Build Docs
-        uses: ./.github/actions/ApiGithubTests
+        uses: ./.github/actions/ApiCustomAction
         with:
           args: 'build-docs api/openapi.yaml  --output ./api/html/openapi.html'
       - uses: actions/upload-artifact@v2
