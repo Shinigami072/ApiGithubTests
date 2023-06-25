@@ -38,6 +38,32 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  OpenAPI:
+    runs-on: ubuntu-latest
+    name: OpenApi
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Lint
+        uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
+        with:
+          args: 'lint api/openapi.yml'
+      - name: Bundle
+        uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
+        with:
+          args: 'bundle --dereferenced api/openapi.yml --output api/bundle/openapi.yaml'
+      - name: Build Docs
+        uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
+        with:
+          args: 'build-docs api/openapi.yml --disableGoogleFont --output api/docs/openapi.html'
+      - uses: actions/upload-artifact@v2
+        with:
+          name: openapi.yaml
+          path: ./api/bundle/openapi.yaml
+      - uses: actions/upload-artifact@v2
+        with:
+          name: openapi.html
+          path: ./api/docs/openapi.html
   openapi-compatiable:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
