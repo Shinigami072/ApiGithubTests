@@ -47,17 +47,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Lint
-        uses: seeebiii/redoc-cli-github-action@v10
+        uses: ./.github/actions/ApiGithubTests
         with:
           args: 'lint api/openapi.yaml'
       - name: Bundle
-        uses: seeebiii/redoc-cli-github-action@v10
+        uses: ./.github/actions/ApiGithubTests
         with:
-          args: 'bundle ./api/openapi.yaml --dereferenced --output ./api/bundle/openapi.yaml'
+          args: 'bundle api/openapi.yaml --dereferenced --output ./api/bundle/openapi.yaml'
       - name: Build Docs
-        uses: seeebiii/redoc-cli-github-action@v10
+        uses: ./.github/actions/ApiGithubTests
         with:
-          args: 'build-docs ./api/openapi.yaml  --output ./api/html/openapi.html'
+          args: 'build-docs api/openapi.yaml  --output ./api/html/openapi.html'
       - uses: actions/upload-artifact@v2
         with:
           name: openapi.yaml
