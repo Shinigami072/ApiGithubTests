@@ -71,14 +71,17 @@ jobs:
           path: ./api/bundle/openapi.yaml
           if-no-files-found: error
 
-      - run: echo "${{toJSON(steps.lint.outputs)}}" >  ./openapi-linting-report.jsom
+      - run: |
+          cat <<EOF
+          ${{toJSON(steps.lint.outputs)}}
+          EOF >  ./openapi-linting-report.json
         if: ${{ failure() }}
         name: "Persist Linting Err Report"
       - uses: actions/upload-artifact@v2
         if:  ${{ failure() }}
         with:
           name: report-lint.json
-          path: ./openapi-linting-report.jsom
+          path: ./openapi-linting-report.json
       - uses: actions/upload-artifact@v2
         with:
           name: openapi.html
