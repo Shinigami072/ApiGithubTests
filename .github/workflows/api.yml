@@ -13,7 +13,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Get Version
         id: get-version
-        run: echo "version=${./gradlew -q printVersion}" >> "$GITHUB_OUTPUT"
+        run: echo "version=$(./gradlew -q printVersion)" >> "$GITHUB_OUTPUT"
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     needs: Version
