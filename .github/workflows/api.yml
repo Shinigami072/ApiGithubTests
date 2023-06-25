@@ -73,7 +73,7 @@ jobs:
 
       - run: |
           cat <<EOF
-          ${{toJSON(steps.lint.outputs.std-err)}}
+          ${{steps.lint.outputs.std-err}}
           EOF >  ./openapi-linting-report.json
         if: ${{ failure() }}
         name: "Persist Linting Err Report"
