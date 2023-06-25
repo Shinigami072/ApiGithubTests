@@ -57,7 +57,7 @@ jobs:
       - name: Build Docs
         uses: seeebiii/redoc-cli-github-action@v10
         with:
-          args: 'build-docs ./api/openapi.yaml  --output ./openapi.html'
+          args: 'build-docs ./api/openapi.yaml  --output ./api/html/openapi.html'
       - uses: actions/upload-artifact@v2
         with:
           name: openapi.yaml
@@ -67,7 +67,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: openapi.html
-          path: ./openapi.html
+          path: ./api/html/openapi.html
           if-no-files-found: error
   openapi-compatiable:
     if: github.event_name == 'pull_request'
