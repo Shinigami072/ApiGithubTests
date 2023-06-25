@@ -1,0 +1,13 @@
+plugins {
+
+}
+
+group = "org.example"
+version = "1.0-SNAPSHOT"
+
+
+val printVersion by tasks.registering {
+    doLast {
+        println(version)
+    }
+}

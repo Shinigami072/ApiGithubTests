@@ -1,0 +1,4 @@
+asyncapi: "3.0.2"
+info:
+  title: API Title
+  version: "1.0"
