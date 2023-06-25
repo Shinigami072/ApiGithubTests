@@ -62,9 +62,9 @@ jobs:
         with:
           args: 'lint api/openapi.yaml --format=checkstyle'
       - run: |
-          cat <<ENDF
-          ${{steps.lint-report.outputs.std-out}}
-          ENDF >  ./openapi-linting-report.xml
+          echo "$REPORT" >  ./openapi-linting-report.xml
+        env:
+          REPORT: ${{steps.lint-report.outputs.std-out}}
         if: ${{ failure() }}
         name: "Persist Linting Err Report"
       - uses: actions/upload-artifact@v2
