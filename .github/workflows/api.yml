@@ -53,11 +53,11 @@ jobs:
       - name: Bundle
         uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
         with:
-          args: 'bundle --dereferenced api/openapi.yml --output api/bundle/openapi.yaml'
+          args: 'bundle --dereferenced ./api/openapi.yaml --output ./api/bundle/openapi.yaml'
       - name: Build Docs
         uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
         with:
-          args: 'build-docs api/openapi.yml --disableGoogleFont --output api/docs/openapi.html'
+          args: 'build-docs ./api/openapi.yaml --disableGoogleFont --output ./api/docs/openapi.html'
       - uses: actions/upload-artifact@v2
         with:
           name: openapi.yaml
