@@ -72,10 +72,10 @@ jobs:
           if-no-files-found: error
 
       - run: >
-          echo ${{steps.lint.outputs.stdout}} 
-          echo ${{steps.lint.outputs.stderr}} 
-          echo ${{steps.lint.outputs.stdout}} > ./openapi-linting-report
-          echo ${{steps.lint.outputs.stderr}} >> ./openapi-linting-report
+          echo ${{steps.lint.outputs.std-out}} 
+          echo ${{steps.lint.outputs.std-err}} `
+          echo ${{steps.lint.outputs.std-out}} > ./openapi-linting-report
+          echo ${{steps.lint.outputs.std-err}} >> ./openapi-linting-report
         if: ${{ failure() }}
         name: "Persist Linting Err Report"
       - uses: actions/upload-artifact@v2
