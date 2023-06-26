@@ -6,6 +6,7 @@ info:
     name: TEST
 servers:
   - url: https://api.server.test/v1
+  - url: https://server.example/v1
 paths:
   /:
     get:
