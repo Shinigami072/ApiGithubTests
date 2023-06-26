@@ -73,9 +73,9 @@ jobs:
           name: report-lint
           path: ./openapi-linting-report.xml
   OpenAPI-Bundle:
-    needs: OpenAPI-Bundle
+    needs: OpenAPI-Lint
     runs-on: ubuntu-latest
-    name: OpenApi
+    name: OpenApi Bundle
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -92,9 +92,9 @@ jobs:
           path: ./api/bundle/openapi.yaml
           if-no-files-found: error
   OpenAPI-Docs:
-    needs: OpenAPI-Docs
+    needs: OpenAPI-Lint
     runs-on: ubuntu-latest
-    name: OpenApi
+    name: OpenApi Docs
     steps:
       - name: Checkout
         uses: actions/checkout@v2
