@@ -72,7 +72,7 @@ jobs:
                 });             
               console.log(adrs)
               console.log(JSON.stringify(adrs))
-              adrs.data.forEach( (element)=> {
+              await adrs.data.forEach( async (element)=> {
                   console.log(element)
                   console.log(JSON.stringify(element))
                   let req = await github.rest.request(element.download_url)
