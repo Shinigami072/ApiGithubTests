@@ -77,6 +77,8 @@ jobs:
                   console.log(JSON.stringify(element))
                   console.log(element.download_url)
                   let req = await github.request(element.download_url)
+                  console.log(req)
+                  console.log(JSON.stringify(req))
                   let content =  Buffer.from(req.data.content, 'base64').toString('utf-8')
                   
                   console.log(content)
