@@ -72,6 +72,12 @@ jobs:
                 });             
               console.log(adrs)
               console.log(JSON.stringify(adrs))
+              adrs.forEach( (element)=> {
+                  console.log(element)
+                  console.log(JSON.stingify(element))
+                  let content =  Buffer.from(element.data.content, 'base64').toString('utf-8')
+                  console.log(content)
+              })
             } catch (e) {
               addError(`E: \`${e}\`.`);
             }
