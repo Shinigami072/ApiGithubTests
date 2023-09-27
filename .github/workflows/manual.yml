@@ -33,6 +33,7 @@ jobs:
     - name: Script
       uses: actions/github-script@v6
       with:
+          github-token: ${{ secrets.MY_PAT }}
           script: |
             const fs = require('fs');
             const errors = [];
