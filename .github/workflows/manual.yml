@@ -75,6 +75,7 @@ jobs:
               await adrs.data.forEach( async (element)=> {
                   console.log(element)
                   console.log(JSON.stringify(element))
+                  console.log(element.download_url)
                   let req = await github.request(element.download_url)
                   let content =  Buffer.from(req.data.content, 'base64').toString('utf-8')
                   
